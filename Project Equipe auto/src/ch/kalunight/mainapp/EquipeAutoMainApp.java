@@ -2,6 +2,7 @@ package ch.kalunight.mainapp;
 
 import java.io.IOException;
 
+import ch.kalunight.mainapp.view.EquipeAutoController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,13 @@ public class EquipeAutoMainApp extends Application {
     /**
      * Data observable
      */
-    private ObservableList<Joueur> personData = FXCollections.observableArrayList();
+    private ObservableList<Joueur> JoueurData = FXCollections.observableArrayList();
+    
+    //Valeur de test
+    public EquipeAutoMainApp() {
+    	JoueurData.add(new Joueur("KaluNight", 1250, "Streamer"));
+    	JoueurData.add(new Joueur("Magouts", 1400, "Admin"));
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -62,11 +69,24 @@ public class EquipeAutoMainApp extends Application {
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(personOverview);
+            
+            //Donne au controlleur l'acces à la main classe.
+            EquipeAutoController controller = loader.getController();
+            controller.setMainApp(this);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Returne les joueurs de la liste observable
+     */
+    public ObservableList<Joueur> getJoueurData(){
+    	return JoueurData;
+    }
+    
+    
     /**
      * Returns the main stage.
      * @return
