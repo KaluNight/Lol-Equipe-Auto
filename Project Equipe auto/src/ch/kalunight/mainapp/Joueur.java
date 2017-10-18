@@ -29,6 +29,7 @@ public class Joueur {
 	 * 
 	 * @param pseudo
 	 * @param mmr
+	 * @param rank
 	 */
 	public Joueur(String pseudo, Integer mmr, String rank) {
 		this.pseudo = new SimpleStringProperty(pseudo);
@@ -39,6 +40,9 @@ public class Joueur {
 	public IntegerProperty getMmrProperty() {
 		return mmr;
 	}
+	public Integer getMmr() {
+		return mmr.get();
+	}
 
 	public void setMmrProperty(Integer mmr) {
 		this.mmr.set(mmr);
@@ -47,6 +51,9 @@ public class Joueur {
 	public StringProperty getPseudoProperty() {
 		return pseudo;
 	}
+	public String getPseudo() {
+		return pseudo.get();
+	}
 
 	public void setPseudoProperty(String pseudo) {
 		this.pseudo.setValue(pseudo);
@@ -54,6 +61,9 @@ public class Joueur {
 
 	public StringProperty getRankProperty() {
 		return rank;
+	}
+	public String getRank() {
+		return rank.get();
 	}
 
 	public void setRankProperty(String rank) {
