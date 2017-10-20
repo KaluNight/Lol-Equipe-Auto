@@ -69,7 +69,9 @@ public class Joueur {
 	public void setRankProperty(String rank) {
 		this.pseudo.setValue(rank);
 	}
-
+	public void setMmrPropertyStringToInt(String str) {
+		this.mmr.set(Integer.parseInt(str));
+	}
 
 
 

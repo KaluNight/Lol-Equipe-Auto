@@ -3,6 +3,8 @@ package ch.kalunight.mainapp.view;
 import ch.kalunight.mainapp.EquipeAutoMainApp;
 import ch.kalunight.mainapp.Joueur;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -71,6 +73,59 @@ public class EquipeAutoController {
 	    }
 	}
 	
+	/**
+	 * Appelé quand l'utilisateur appuie sur le bouton delete
+	 */
+	@FXML
+	private void handleDeleteJoueur() {
+		int selectedIndex = joueurTable.getSelectionModel().getSelectedIndex();
+		if(selectedIndex >= 0) {
+			joueurTable.getItems().remove(selectedIndex);
+		}
+		else {
+			//Si rien n'est sélectionné
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(equipeAutoMainApp.getPrimaryStage());
+	        alert.setTitle("Aucune sélection");
+	        alert.setHeaderText("Aucun joueur sélectionné");
+	        alert.setContentText("Merci de sélectionné un joueur.");
+		}
+	}
+	/**
+	 * Appelée quand l'utilisateur à appuyer sur sur le bouton nouveau. Ouvre une boite de dialogue pour créer la nouvelle personne.
+	 */
+	@FXML
+	private void handleNewJoueur() {
+		Joueur tempJoueur = new Joueur();
+	    boolean okClicked = equipeAutoMainApp.showJoueurEditDialog(tempJoueur);
+	    if (okClicked) {
+	    	equipeAutoMainApp.getJoueurData().add(tempJoueur);
+	    }
+	}
+
+	/**
+	 * Appelé quand l'utilisateur à appuyer sur le bouton Edit, ouvre un dialogue pour modifier les détails du Joueur.
+	 */
+	@FXML
+	private void handleEditJoueur() {
+	    Joueur selectedPerson = joueurTable.getSelectionModel().getSelectedItem();
+	    if (selectedPerson != null) {
+	        boolean okClicked = equipeAutoMainApp.showJoueurEditDialog(selectedPerson);
+	        if (okClicked) {
+	            showJoueurDetails(selectedPerson);
+	        }
+
+	    } else {
+	        // Rien n'est sélectionner
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(equipeAutoMainApp.getPrimaryStage());
+	        alert.setTitle("Aucune sélection");
+	        alert.setHeaderText("Aucun joueur sélectionné");
+	        alert.setContentText("Merci de sélectionner un joueur dans le tableau.");
+
+	        alert.showAndWait();
+	    }
+	}
     /**
      * Est appelé par l'application principale qui donne une reference de lui.
      * 

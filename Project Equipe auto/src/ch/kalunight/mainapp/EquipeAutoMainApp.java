@@ -3,6 +3,7 @@ package ch.kalunight.mainapp;
 import java.io.IOException;
 
 import ch.kalunight.mainapp.view.EquipeAutoController;
+import ch.kalunight.mainapp.view.JoueurEditDialogController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class EquipeAutoMainApp extends Application {
@@ -37,6 +39,42 @@ public class EquipeAutoMainApp extends Application {
 
         showPersonOverview();
     }
+	/**
+	 * Ouvre la fenetre d'éditage de joueur. Si l'utilisateur appuie
+	 * sur OK, les changement sont sauvegardées dans l'objet Joueur et true est retournées.
+	 * 
+	 * @param Joueur l'objet joueur édité
+	 * @return true si l'utilisateur appuie sur OK, sinon false.
+	 */
+	public boolean showJoueurEditDialog(Joueur joueur) {
+	    try {
+	        // Charge le fichier FXML et créer un nouveau stage pour le PopUp.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(EquipeAutoMainApp.class.getResource("view/JoueurEditDialog.fxml"));
+	        AnchorPane page = (AnchorPane) loader.load();
+
+	        // Crée un nouveau stage
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Editage Joueur");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        dialogStage.initOwner(primaryStage);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+
+	        // Définit le joueur du controller
+	        JoueurEditDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	        controller.setPerson(joueur);
+
+	        // Affiche le dialogue et attends que l'utilisateur le referme.
+	        dialogStage.showAndWait();
+
+	        return controller.isOkClicked();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 
     /**
      * Initializes the root layout.
