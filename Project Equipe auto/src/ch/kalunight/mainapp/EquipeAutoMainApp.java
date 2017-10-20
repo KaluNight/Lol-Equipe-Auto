@@ -64,7 +64,7 @@ public class EquipeAutoMainApp extends Application {
 	        // Définit le joueur du controller
 	        JoueurEditDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
-	        controller.setPerson(joueur);
+	        controller.setJoueur(joueur);
 
 	        // Affiche le dialogue et attends que l'utilisateur le referme.
 	        dialogStage.showAndWait();

@@ -42,7 +42,7 @@ public class JoueurEditDialogController {
 	 *
 	 * @param joueur
 	 */
-	public void setPerson(Joueur joueur) {
+	public void setJoueur(Joueur joueur) {
 		this.joueur = joueur;
 
 		pseudoField.setText(joueur.getPseudo());
