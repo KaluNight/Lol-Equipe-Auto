@@ -30,10 +30,11 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <ButtonBar layoutX="174.0" layoutY="448.0" prefHeight="46.0" prefWidth="307.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="15.0">
+                        <ButtonBar layoutX="174.0" layoutY="448.0" prefHeight="46.0" prefWidth="425.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="15.0">
                           <buttons>
-                            <Button mnemonicParsing="false" text="Supprimer un joueur" />
-                              <Button mnemonicParsing="false" text="Ajouter un joueur" />
+                            <Button mnemonicParsing="false" onAction="#handleDeleteJoueur" text="Supprimer un joueur" />
+                              <Button mnemonicParsing="false" onAction="#handleEditJoueur" text="Modifier un joueur" />
+                              <Button mnemonicParsing="false" onAction="#handleNewJoueur" text="Ajouter un joueur" />
                           </buttons>
                         </ButtonBar>
                      </children>
